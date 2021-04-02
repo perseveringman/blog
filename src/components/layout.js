@@ -5,12 +5,14 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-
+import { Global } from '@emotion/react'
 import Header from "./header"
+import Footer from "./footer"
 import "./layout.css"
+import { globalStyles } from '@styles'
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -22,9 +24,9 @@ const Layout = ({ children }) => {
       }
     }
   `)
-
   return (
     <>
+      <Global styles={globalStyles} />
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <div
         style={{
@@ -35,20 +37,8 @@ const Layout = ({ children }) => {
         }}
       >
         <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `2rem`,
-            position: 'absolute',
-            bottom: '20px',
-            left: '50%',
-            transform: 'translateX(-50%)'
-          }}
-        >
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
       </div>
+      <Footer />
     </>
   )
 }

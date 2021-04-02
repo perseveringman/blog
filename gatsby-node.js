@@ -38,3 +38,18 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 }
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        '@components': path.resolve(__dirname, '.src/components/'),
+        // '@icons': path.resolve(__dirname, '../../icons/'),
+        '@styles': path.resolve(__dirname, './src/styles/'),
+        // '@utils': path.resolve(__dirname, '../../utils/'),
+        // '@types': path.resolve(__dirname, '../../types/'),
+      },
+      extensions: ['.js', '.json', '.ts', '.tsx'],
+    },
+  });
+};

@@ -9,7 +9,21 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
-
+const themeUIDarkModeWorkaroundScript = [
+  {
+    type: 'text/javascript',
+    innerHTML: `
+    (function() {
+      try {
+        var mode = localStorage.getItem('theme-ui-color-mode');
+        if (!mode) {
+          localStorage.setItem('theme-ui-color-mode', 'light');
+        }
+      } catch (e) {}
+    })();
+  `,
+  },
+];
 function SEO({ description, lang, meta, title }) {
   const { site } = useStaticQuery(
     graphql`
@@ -33,6 +47,7 @@ function SEO({ description, lang, meta, title }) {
       htmlAttributes={{
         lang,
       }}
+      script={themeUIDarkModeWorkaroundScript}
       title={title}
       titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
       meta={[
