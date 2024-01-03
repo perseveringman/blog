@@ -43,6 +43,9 @@
   content: "\f099";
 }
 
+.fa-x-twitter:before {
+  content: "\e61b"; }
+
 .fa-square-twitter:before {
   content: "\f081";
 }
